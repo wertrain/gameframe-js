@@ -10,6 +10,9 @@ function createGameFrame(canvasId) {
     Game.maxFrameSkip = 10;
     Game.skipTicks = 1000 / Game.fps;
     Game.canvas = document.getElementById(canvasId);
+    if (Game.canvas === null) {
+        return false;
+    }
     Game.context = Game.canvas.getContext('2d');
     
     /**
