@@ -1,5 +1,6 @@
 /**
  * 簡易ゲームフレームを作る
+ *
  */
 function createGameFrame(canvasId) {
     if (typeof canvasId === 'undefined') {
@@ -18,11 +19,15 @@ function createGameFrame(canvasId) {
     /**
      * 毎フレーム呼び出される更新処理
      * ユーザーに上書きしてもらう
+     *
+     * @param tick
      */
     Game.update = function(tick) {};
     /**
      * 毎フレーム呼び出される描画処理
      * ユーザーに上書きしてもらう
+     *
+     * @param context Canvasのコンテキスト
      */
     Game.draw = function(context) {};
     
