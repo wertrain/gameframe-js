@@ -7,9 +7,10 @@ function createGameFrame(canvasId) {
         return null;
     }
     var Game = {};
-    Game.fps = 60;
+    var FPS = 60;
+    Game.fps = 0;
     Game.maxFrameSkip = 10;
-    Game.skipTicks = 1000 / Game.fps;
+    Game.skipTicks = 1000 / FPS;
     Game.canvas = document.getElementById(canvasId);
     if (Game.canvas === null) {
         return false;
@@ -45,21 +46,36 @@ function createGameFrame(canvasId) {
     /**
      * ゲームのループ処理
      */
+    //Game.run = (function() {
+    //    var loops = 0;
+    //    var nextGameTick = (new Date).getTime();
+    //    var startTime = (new Date).getTime();
+    //    return function() {
+    //        loops = 0;
+    //        while (!Game.paused && (new Date).getTime() > nextGameTick && loops < Game.maxFrameSkip) {
+    //            Game._mainloop(nextGameTick - startTime);
+    //            nextGameTick += Game.skipTicks;
+    //            loops++;
+    //        }
+    //        Game.draw(Game.context);
+    //    };
+    
+    //})();
     Game.run = (function() {
         var loops = 0;
-        var nextGameTick = (new Date).getTime();
+        var gameTick = (new Date).getTime();
         var startTime = (new Date).getTime();
+        var fpsCount = 0;
         return function() {
-            loops = 0;
-            while (!Game.paused && (new Date).getTime() > nextGameTick && loops < Game.maxFrameSkip) {
-                Game._mainloop(nextGameTick - startTime);
-                nextGameTick += Game.skipTicks;
-                loops++;
-            }
+            Game._mainloop(gameTick - startTime);
             Game.draw(Game.context);
+            ++fpsCount;
+            if ((new Date).getTime() > gameTick + 1000) {
+                Game.fps = fpsCount;
+            }
         };
     })();
-
+    
     /**
      * 更新処理を決定
      */
