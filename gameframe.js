@@ -42,6 +42,10 @@ function createGameFrame(canvasId) {
         Game.tick = tick;
         Game.update(tick);
     };
+    Game.clearCanvas = function(color) {
+        Game.context.fillStyle = color;
+        Game.context.fillRect(0, 0, Game.canvas.width, Game.canvas.height);
+    }
     
     /**
      * ƒQ[ƒ€‚Ìƒ‹[ƒvˆ—
@@ -59,19 +63,22 @@ function createGameFrame(canvasId) {
     //        }
     //        Game.draw(Game.context);
     //    };
-    
     //})();
+
     Game.run = (function() {
         var loops = 0;
-        var gameTick = (new Date).getTime();
+        var beforeTick = (new Date).getTime();
         var startTime = (new Date).getTime();
         var fpsCount = 0;
         return function() {
-            Game._mainloop(gameTick - startTime);
+            var tick = (new Date).getTime();
+            Game._mainloop(tick - startTime);
             Game.draw(Game.context);
             ++fpsCount;
-            if ((new Date).getTime() > gameTick + 1000) {
+            if (tick > beforeTick + 1000) {
                 Game.fps = fpsCount;
+                beforeTick = tick;
+                fpsCount = 0;
             }
         };
     })();

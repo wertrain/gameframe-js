@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="">
+    <title>Gameframe Sample</title>
+  </head>
+
+  <body>
+    <canvas id="game-canvas" width="640" height="480"></canvas>
+    <script src="gameframe.js"></script>
+    <script>
+        window.onload = function() {
+            var gameframe = createGameFrame('game-canvas');
+            gameframe.update = function(tick) {
+                
+            };
+            gameframe.draw = function(context) {
+                this.clearCanvas('#0000FF');
+                context.fillStyle = '#FFFFFF';
+                context.fillText('FPS: ' + gameframe.fps, 10, 15);
+            };
+            gameframe.start();
+        }
+    </script>
+  </body>
+</html>
