@@ -13,7 +13,7 @@ function createGameFrame(canvasId) {
     Game.skipTicks = 1000 / FPS;
     Game.canvas = document.getElementById(canvasId);
     if (Game.canvas === null) {
-        return false;
+        return null;
     }
     Game.context = Game.canvas.getContext('2d');
     
