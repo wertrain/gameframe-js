@@ -15,6 +15,6 @@ window.onload = function() {
         context.fillStyle = '#FFFFFF';
         context.fillText('FPS: ' + gameframe.fps, 10, 15);
     };
-    //gameframe.start();
+    gameframe.start();
 }
 ```
